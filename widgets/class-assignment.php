@@ -176,9 +176,15 @@ class Assignment extends Widget_Base {
 		$this->add_inline_editing_attributes( 'content', 'advanced' );
 		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 		?>
-		<h2 class="box__title" <?php echo $this->get_render_attribute_string( 'title' ); ?><?php echo wp_kses( $settings['title'], array() ); ?></h2>
-		<div class="box__description" <?php echo $this->get_render_attribute_string( 'description' ); ?><?php echo wp_kses( $settings['description'], array() ); ?></div>
-		<div class="box__content" <?php echo $this->get_render_attribute_string( 'content' ); ?><?php echo wp_kses( $settings['content'], array() ); ?></div>
+		<h2 class="box__title" <?php echo $this->get_render_attribute_string( 'title' ); ?>> 
+			<?php echo wp_kses( $settings['title'], array() ); ?>
+		</h2>
+		<div class="box__description" <?php echo $this->get_render_attribute_string( 'description' ); ?>> 
+			<?php echo wp_kses( $settings['description'], array() ); ?>
+		</div>
+		<div class="box__content" <?php echo $this->get_render_attribute_string( 'content' ); ?>> 
+			<?php echo wp_kses( $settings['content'], array() ); ?>
+		</div>
 		<?php
 	}
 
