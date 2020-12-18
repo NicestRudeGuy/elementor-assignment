@@ -97,11 +97,19 @@ class Assignment extends Widget_Base {
 	public function get_categories() {
 		return array( 'basic' );
 	}
+
 	/**
 	 * Enqueue styles.
 	 */
 	public function get_style_depends() {
-		return array( 'assignment' );
+		return array( 'assignment_css' );
+	}
+
+	/**
+	 * Enqueue script.
+	 */
+	public function get_script_depends() {
+		return array( 'assignment_js' );
 	}
 
 	/**
