@@ -1,11 +1,35 @@
-.box__title {
+.accordian {
+  border: 5px solid red;
+  background-color: white;
+}
+
+.accordian__title {
+  background-color: black;
   color: red;
 }
 
-.box__description {
+.accordian__heading {
+  background-color: grey;
+  color: chartreuse;
+}
+
+.accordian__description {
+  background-color: white;
   color: blue;
 }
 
-.box__content {
-  color: brown;
+.accordian__button {
+  background-color: blue;
+  color: #fff; 
+  cursor: pointer; 
+  padding: 10px 30px; 
+
+}
+  .accordian__button:hover {
+    box-shadow: 5px 5px lightblue;
+  }
+
+.accordian__image {
+  height: 200px;
+  width: 200px;
 }

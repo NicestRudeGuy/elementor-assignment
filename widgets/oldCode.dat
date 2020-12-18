@@ -13,8 +13,8 @@
 
 namespace ElementorAssignment\Widgets;
 
-use Elementor\Controls_Manager;
 use Elementor\Widget_Base;
+use Elementor\Controls_Manager;
 
 // Security Note: Blocks direct access to the plugin PHP files.
 defined( 'ABSPATH' ) || die();
@@ -25,7 +25,6 @@ defined( 'ABSPATH' ) || die();
  * @since 1.0.0
  */
 class Assignment extends Widget_Base {
-
 	/**
 	 * Class constructor.
 	 *
@@ -122,7 +121,7 @@ class Assignment extends Widget_Base {
 	 *
 	 * @access protected
 	 */
-	protected function _register_controls() {    // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+	protected function _register_controls() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 		$this->start_controls_section(
 			'section_content',
 			array(
@@ -139,49 +138,21 @@ class Assignment extends Widget_Base {
 			)
 		);
 
-		$repeater = new \Elementor\Repeater();
-
-		$repeater->add_control(
-			'heading',
-			array(
-				'label' => __( 'Heading', 'elementor-assignment' ),
-				'type'  => Controls_Manager::TEXT,
-
-			)
-		);
-
-		$repeater->add_control(
-			'button',
-			array(
-				'label'       => __( 'button', 'elementor-assignment' ),
-				'type'        => Controls_Manager::URL,
-				'placeholder' => __( 'www.google.com', 'elementor-assignment' ),
-			)
-		);
-
-		$repeater->add_control(
+		$this->add_control(
 			'description',
 			array(
-				'label' => __( 'Description', 'elementor-assignment' ),
-				'type'  => Controls_Manager::TEXTAREA,
-			)
-		);
-
-		$repeater->add_control(
-			'image',
-			array(
-				'label' => __( 'Image', 'elementor-assignment' ),
-				'type'  => Controls_Manager::MEDIA,
+				'label'   => __( 'Description', 'elementor-assignment' ),
+				'type'    => Controls_Manager::TEXTAREA,
+				'default' => __( 'Description', 'elementor-assignment' ),
 			)
 		);
 
 		$this->add_control(
-			'list',
+			'content',
 			array(
-				'label'       => __( 'Repeater List', 'elementor-assignment' ),
-				'type'        => Controls_Manager::REPEATER,
-				'fields'      => $repeater->get_controls(),
-				'title_field' => '{{{ heading }}}',
+				'label'   => __( 'Content', 'elementor-assignment' ),
+				'type'    => Controls_Manager::WYSIWYG,
+				'default' => __( 'Content', 'elementor-assignment' ),
 			)
 		);
 
@@ -198,43 +169,21 @@ class Assignment extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$settings   = $this->get_settings_for_display();
-		$img_url    = wp_get_attachment_image_src( $settings['image']['id'], 'full' );
-		$img_url    = ! empty( $img_url ) ? $img_url[0] : 0;
-		$button_url = $settings['button']['url'];
+		$settings = $this->get_settings_for_display();
 
-		$this->add_render_attribute(
-			'title',
-			'class',
-			array(
-				'accordian__title',
-			)
-		);
-
-		$this->add_inline_editing_attributes( 'title', 'advanced' );
-		$this->add_inline_editing_attributes( 'heading', 'basic' );
+		$this->add_inline_editing_attributes( 'title', 'none' );
 		$this->add_inline_editing_attributes( 'description', 'basic' );
-
-        // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
+		$this->add_inline_editing_attributes( 'content', 'advanced' );
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 		?>
-		<div class="accordian">
-			<h2 <?php echo $this->get_render_attribute_string( 'title' ); ?>>
-				<?php echo $settings['title']; ?>
-			</h2>
-			<div <?php echo $this->get_render_attribute_string( 'heading' ); ?>>
-				<?php echo $settings['heading']; ?>
-			</div>
-			<a class="accordian__button"> 
-				<?php
-				if ( $button_url ) {
-					echo $button_url;
-				}
-				?>
-			</a>
-			<div  <?php echo $this->get_render_attribute_string( 'description' ); ?>>
-				<?php echo $settings['description']; ?>
-			</div>
-			<img class="accordian__image" src="<?php echo $img_url; ?>" />
+		<h2 class="box__title" <?php echo $this->get_render_attribute_string( 'title' ); ?>> 
+			<?php echo wp_kses( $settings['title'], array() ); ?>
+		</h2>
+		<div class="box__description" <?php echo $this->get_render_attribute_string( 'description' ); ?>> 
+			<?php echo wp_kses( $settings['description'], array() ); ?>
+		</div>
+		<div class="box__content" <?php echo $this->get_render_attribute_string( 'content' ); ?>> 
+			<?php echo wp_kses( $settings['content'], array() ); ?>
 		</div>
 		<?php
 	}
@@ -248,21 +197,16 @@ class Assignment extends Widget_Base {
 	 *
 	 * @access protected
 	 */
-	protected function _content_template() {  // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+	protected function _content_template() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 		?>
 		<#
-		view.addRenderAttribute( 'title', 'class', [ 'accordian__title' ] );
-		view.addInlineEditingAttributes( 'heading', 'basic' );
+		view.addInlineEditingAttributes( 'title', 'none' );
 		view.addInlineEditingAttributes( 'description', 'basic' );
-		console.log(settings.button);
+		view.addInlineEditingAttributes( 'content', 'advanced' );
 		#>
-		<div class="accordian">
-			<h2 {{{ view.getRenderAttributeString( 'title' ) }}}>{{{ settings.title }}}</h2>
-			<div  {{{ view.getRenderAttributeString( 'heading' )}}}> {{{settings.heading}}}</div>
-			<a class="accordian_button">{{{settings.button.url}}}</a>
-			<div  {{{ view.getRenderAttributeString( 'description' ) }}}>{{{ settings.description || 'hey' }}}</div>
-			<img class="accordian__image" src="{{{settings.image.url}}}"  />
-		</div>
+		<h2 class="box__title" {{{ view.getRenderAttributeString( 'title' ) }}}>{{{ settings.title }}}</h2>
+		<div class="box__description" {{{ view.getRenderAttributeString( 'description' ) }}}>{{{ settings.description }}}</div>
+		<div class="box__content" {{{ view.getRenderAttributeString( 'content' ) }}}>{{{ settings.content }}}</div>
 		<?php
 	}
 }
