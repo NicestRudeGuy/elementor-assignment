@@ -35,7 +35,7 @@ class Assignment extends Widget_Base {
 		parent::__construct( $data, $args );
 
 		wp_register_style( 'assignment_css', plugins_url( '/assets/css/main.css', ELEMENTOR_ASSIGNMENT ), array(), wp_rand(), 'all' );
-		wp_register_style( 'assignment_js', plugins_url( '/assets/js/main.js', ELEMENTOR_ASSIGNMENT ), array(), wp_rand(), true );
+		wp_register_script( 'assignment_js', plugins_url( '/assets/js/main.js', ELEMENTOR_ASSIGNMENT ), array(), wp_rand(), true );
 
 		wp_enqueue_script( 'assignment_js' );
 		wp_enqueue_style( 'assignment_css' );

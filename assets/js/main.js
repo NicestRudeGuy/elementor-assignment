@@ -1,1 +1,1 @@
-alert("hey it worked!");
+console.log('hello from assignment js script');
