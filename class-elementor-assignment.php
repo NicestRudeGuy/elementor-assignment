@@ -5,13 +5,10 @@
  * @category   Class
  * @package    ElementorAssignment
  * @subpackage WordPress
- * @author     Ben Marshall <me@benmarshall.me>
- * @copyright  2020 Ben Marshall
+ * @author     Vipin Kumar Dinkar <vipinkumard365@gmail.com>
  * @license    https://opensource.org/licenses/GPL-3.0 GPL-3.0-only
- * @link       link(https://www.benmarshall.me/build-custom-elementor-widgets/,
- *             Build Custom Elementor Widgets)
  * @since      1.0.0
- * php version 7.3.9
+ * php version 7.3.5
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
