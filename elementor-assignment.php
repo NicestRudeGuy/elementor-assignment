@@ -5,7 +5,7 @@
  * @package ElementorAssignment
  *
  * Plugin Name: Elementor Assignment
- * Description: Simple Elementor plugin example
+ * Description: Training assignment for custom elementor widget
  * Plugin URI:  https://github.com/NicestRudeGuy/elementor-assignment
  * Version:     1.0.0
  * Author:      Vipin Kumar Dinkar
