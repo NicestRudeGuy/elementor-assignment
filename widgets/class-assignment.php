@@ -198,10 +198,11 @@ class Assignment extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$settings   = $this->get_settings_for_display();
-		$img_url    = wp_get_attachment_image_src( $settings['image']['id'], 'full' );
+		$settings = $this->get_settings_for_display();
+		/* print_r( $settings['list'][0] ); */
+		$img_url    = wp_get_attachment_image_src( $settings['list'][0]['image']['id'], 'full' );
 		$img_url    = ! empty( $img_url ) ? $img_url[0] : 0;
-		$button_url = $settings['button']['url'];
+		$button_url = $settings['list'][0]['button']['url'];
 
 		$this->add_render_attribute(
 			'title',
@@ -222,7 +223,7 @@ class Assignment extends Widget_Base {
 				<?php echo $settings['title']; ?>
 			</h2>
 			<div <?php echo $this->get_render_attribute_string( 'heading' ); ?>>
-				<?php echo $settings['heading']; ?>
+				<?php echo $settings['list'][0]['heading']; ?>
 			</div>
 			<a class="accordian__button"> 
 				<?php
@@ -232,7 +233,7 @@ class Assignment extends Widget_Base {
 				?>
 			</a>
 			<div  <?php echo $this->get_render_attribute_string( 'description' ); ?>>
-				<?php echo $settings['description']; ?>
+				<?php echo $settings['list'][0]['description']; ?>
 			</div>
 			<img class="accordian__image" src="<?php echo $img_url; ?>" />
 		</div>
@@ -254,14 +255,14 @@ class Assignment extends Widget_Base {
 		view.addRenderAttribute( 'title', 'class', [ 'accordian__title' ] );
 		view.addInlineEditingAttributes( 'heading', 'basic' );
 		view.addInlineEditingAttributes( 'description', 'basic' );
-		console.log(settings.button);
+		//console.log(settings.list[0]);
 		#>
 		<div class="accordian">
 			<h2 {{{ view.getRenderAttributeString( 'title' ) }}}>{{{ settings.title }}}</h2>
 			<div  {{{ view.getRenderAttributeString( 'heading' )}}}> {{{settings.heading}}}</div>
-			<a class="accordian_button">{{{settings.button.url}}}</a>
+			<a class="accordian_button">{{{settings.list[0].button.url || 'url'}}}</a>
 			<div  {{{ view.getRenderAttributeString( 'description' ) }}}>{{{ settings.description || 'hey' }}}</div>
-			<img class="accordian__image" src="{{{settings.image.url}}}"  />
+			<img class="accordian__image" src="{{{settings.list[0].image.url}}}"  />
 		</div>
 		<?php
 	}
