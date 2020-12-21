@@ -146,16 +146,22 @@ class Assignment extends Widget_Base {
 			array(
 				'label' => __( 'Heading', 'elementor-assignment' ),
 				'type'  => Controls_Manager::TEXT,
-
 			)
 		);
 
 		$repeater->add_control(
-			'button',
+			'button_name',
 			array(
-				'label'       => __( 'button', 'elementor-assignment' ),
-				'type'        => Controls_Manager::URL,
-				'placeholder' => __( 'www.google.com', 'elementor-assignment' ),
+				'label' => __( 'Button Name', 'elementor-assignment' ),
+				'type'  => Controls_Manager::TEXT,
+			)
+		);
+
+		$repeater->add_control(
+			'button_url',
+			array(
+				'label' => __( 'Button Url', 'elementor-assignment' ),
+				'type'  => Controls_Manager::URL,
 			)
 		);
 
@@ -199,71 +205,104 @@ class Assignment extends Widget_Base {
 	 */
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-		/* print_r( $settings['list'][0] ); */
-		$img_url    = wp_get_attachment_image_src( $settings['list'][0]['image']['id'], 'full' );
-		$img_url    = ! empty( $img_url ) ? $img_url[0] : 0;
-		$button_url = $settings['list'][0]['button']['url'];
-
-		$this->add_render_attribute(
-			'title',
-			'class',
-			array(
-				'accordian__title',
-			)
-		);
-
-		$this->add_inline_editing_attributes( 'title', 'advanced' );
-		$this->add_inline_editing_attributes( 'heading', 'basic' );
-		$this->add_inline_editing_attributes( 'description', 'basic' );
-
-        // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 		?>
 		<div class="accordian">
-			<h2 <?php echo $this->get_render_attribute_string( 'title' ); ?>>
-				<?php echo $settings['title']; ?>
-			</h2>
-			<div <?php echo $this->get_render_attribute_string( 'heading' ); ?>>
-				<?php echo $settings['list'][0]['heading']; ?>
-			</div>
-			<a class="accordian__button"> 
+			<div class="accordian__item">
+				<div class="accordian__section">
+				<div class="accordian__title">
+		<?php echo $settings['title']; ?>
+		</div>
 				<?php
-				if ( $button_url ) {
-					echo $button_url;
+				foreach ( $settings['list'] as $key => $item ) {
+					?>
+					<div class="accordian__heading <?php echo ( 0 === $key ) ? 'active' : ''; ?>"">
+					<?php echo $item['heading']; ?>
+					</div>
+					<?php
 				}
 				?>
-			</a>
-			<div  <?php echo $this->get_render_attribute_string( 'description' ); ?>>
-				<?php echo $settings['list'][0]['description']; ?>
+				</div>
+				<div class="accordian__section">
+						<?php
+						foreach ( $settings['list'] as $key => $item ) {
+							?>
+						<div class="accordian__content  <?php echo ( 0 === $key ) ? 'active' : ''; ?>">
+							<div class="accordian__description">
+							<?php echo $item['description']; ?>
+							</div>
+							<a class="accordian__button" href="<?php echo $settings['list'][ $key ]['button_url']['url']; ?>" > 
+							<?php echo $item['button_name']; ?>
+							</a>
+						</div>
+							<?php
+						}
+						?>
+				</div>
+				<div class="accordian__section">
+					<div class="accordian__pic">
+						<?php
+						foreach ( $settings['list'] as $key => $item ) {
+							?>
+							<img class="accordian__image <?php echo ( 0 === $key ) ? 'active' : ''; ?>" src="<?php echo $item['image']['url']; ?>" />
+							<?php
+						}
+						?>
+					</div>
+				</div>
 			</div>
-			<img class="accordian__image" src="<?php echo $img_url; ?>" />
 		</div>
-		<?php
+					<?php
 	}
 
-	/**
-	 * Render the widget output in the editor.
-	 *
-	 * Written as a Backbone JavaScript template and used to generate the live preview.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @access protected
-	 */
+				/**
+				 * Render the widget output in the editor.
+				 *
+				 * Written as a Backbone JavaScript template and used to generate the live preview.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @access protected
+				 */
 	protected function _content_template() {  // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 		?>
 		<#
-		view.addRenderAttribute( 'title', 'class', [ 'accordian__title' ] );
-		view.addInlineEditingAttributes( 'heading', 'basic' );
-		view.addInlineEditingAttributes( 'description', 'basic' );
-		//console.log(settings.list[0]);
+		console.log(settings);
+
+		if( settings.list ){
+			#>
+			<div>
+			</div>
+			<#
+		}
+		else {
 		#>
 		<div class="accordian">
-			<h2 {{{ view.getRenderAttributeString( 'title' ) }}}>{{{ settings.title }}}</h2>
-			<div  {{{ view.getRenderAttributeString( 'heading' )}}}> {{{settings.heading}}}</div>
-			<a class="accordian_button">{{{settings.list[0].button.url || 'url'}}}</a>
-			<div  {{{ view.getRenderAttributeString( 'description' ) }}}>{{{ settings.description || 'hey' }}}</div>
-			<img class="accordian__image" src="{{{settings.list[0].image.url}}}"  />
+		<div class="accordian__title">
+			{{{settings.title}}}
 		</div>
+			<div class="accordian__item">
+				<div class="accordian__section">
+					<div class="accordian__heading">
+						{{{settings.list[0].heading}}}
+					</div>
+				</div>
+				<div class="accordian__section">
+					<div class="accordian__description">
+						{{{settings.list[0].description}}}
+					</div>
+					<a class="accordian__button" href="{{{settings.list[0].button_url.url}}}" > 
+						{{{settings.list[0].button_name}}}
+					</a>
+				</div>
+				<div class="accordian__section">
+					<img class="accordian__image" src="{{{settings.list[0].image.url}}}" />
+				</div>
+			</div>
+		</div>
+		<#
+		}
+		#>
 		<?php
 	}
 }
