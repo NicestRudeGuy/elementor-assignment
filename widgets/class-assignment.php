@@ -224,6 +224,7 @@ class Assignment extends Widget_Base {
 				?>
 				</div>
 				<div class="accordian__section">
+					<div class="accordian__section-b">
 						<?php
 						foreach ( $settings['list'] as $key => $item ) {
 							?>
@@ -238,9 +239,10 @@ class Assignment extends Widget_Base {
 							<?php
 						}
 						?>
+					</div>
 				</div>
 				<div class="accordian__section">
-					<div class="accordian__pic">
+					<div class="accordian__section-c">
 						<?php
 						foreach ( $settings['list'] as $key => $item ) {
 							?>
@@ -272,6 +274,7 @@ class Assignment extends Widget_Base {
 		if( settings.list ){
 			#>
 			<div>
+				hey
 			</div>
 			<#
 		}
