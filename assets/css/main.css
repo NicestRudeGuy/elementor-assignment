@@ -73,7 +73,9 @@
 .accordian__section-b{
   display: flex;
   height: 100%;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
+
 }
 
 .accordian__section-c {

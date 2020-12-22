@@ -15,6 +15,7 @@ namespace ElementorAssignment\Widgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Widget_Base;
+use Elementor\Utils;
 
 // Security Note: Blocks direct access to the plugin PHP files.
 defined( 'ABSPATH' ) || die();
@@ -187,8 +188,21 @@ class Assignment extends Widget_Base {
 				'label'       => __( 'Repeater List', 'elementor-assignment' ),
 				'type'        => Controls_Manager::REPEATER,
 				'fields'      => $repeater->get_controls(),
+				'default'     => array(
+					array(
+						'heading'     => __( 'Lorem ipsum dolor sit amet', 'elementor-assignment' ),
+						'button_name' => __( 'Lorem ipsum dolor', 'elementor-assignment' ),
+						'button_url'  => array(
+							'url' => __( 'https://www.yourlink.com', 'elementor-assignment' ),
+						),
+						'description' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing aliquip ex ea commodo consequat. ', 'elementor-assignment' ),
+						'image'       => array(
+							'url' => Utils::get_placeholder_image_src(),
+						),
+					),
+				),
 				'title_field' => '{{{ heading }}}',
-			)
+			),
 		);
 
 		$this->end_controls_section();
@@ -269,41 +283,51 @@ class Assignment extends Widget_Base {
 	protected function _content_template() {  // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 		?>
 		<#
-		console.log(settings);
-
-		if( settings.list ){
-			#>
-			<div>
-				hey
-			</div>
-			<#
-		}
-		else {
+		//console.log(settings.list);
+		if ( settings.list ){
 		#>
 		<div class="accordian">
-		<div class="accordian__title">
-			{{{settings.title}}}
-		</div>
 			<div class="accordian__item">
 				<div class="accordian__section">
+				<div class="accordian__title">
+				{{{settings.title}}}
+				</div>
 					<div class="accordian__heading">
-						{{{settings.list[0].heading}}}
+					{{{settings.list[0].heading}}}
+						<#
+						console.log(settings.list);
+						#>
 					</div>
 				</div>
 				<div class="accordian__section">
-					<div class="accordian__description">
-						{{{settings.list[0].description}}}
+					<div class="accordian__section-b">
+
+						<div class="accordian__content">
+							<div class="accordian__description">
+
+							</div>
+							<a class="accordian__button" href="{{{settings.list[0].button_url.url}}}" > 
+							{{{settings.list[0].button_name}}}
+							</a>
+						</div>
+
 					</div>
-					<a class="accordian__button" href="{{{settings.list[0].button_url.url}}}" > 
-						{{{settings.list[0].button_name}}}
-					</a>
 				</div>
 				<div class="accordian__section">
-					<img class="accordian__image" src="{{{settings.list[0].image.url}}}" />
+					<div class="accordian__section-c">
+
+							<img class="accordian__image" src="{{{settings.list[0].image.url}}}" />
+
+					</div>
 				</div>
 			</div>
 		</div>
-		<#
+		<# } else{
+			#>
+			<h1> 
+				Loading...
+			</h1>
+			<#
 		}
 		#>
 		<?php
