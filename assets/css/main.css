@@ -32,6 +32,7 @@
   border-left: 3px solid rgb(11, 97, 158);
   background: rgba(221, 221, 221, 0.746);
   color:  rgb(11, 97, 158);
+  transition: 0.5s;
 }
 
 .accordian__heading.active:after {
