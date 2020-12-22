@@ -30,7 +30,7 @@
 
 .accordian__heading.active {
   border-left: 3px solid rgb(11, 97, 158);
-  background: rgb(221, 221, 221);
+  background: rgba(221, 221, 221, 0.746);
   color:  rgb(11, 97, 158);
 }
 
@@ -41,7 +41,9 @@
   display: block;
   background: url(../img/tick.png);
   background-size: cover;
+  margin-top: 2px;
   float: right;
+  animation: pop 0.3s;
 }
 
 .accordian__content {
@@ -84,10 +86,35 @@
   place-items: center;
 }
 
+.accordian__image {
+  display: block;
+  transition: all 1s;
+}
+
 .accordian__image , .accordian__content {
   display: none;
 }
 
 .accordian__image.active , .accordian__content.active {
   display: block;
+  animation: pop 0.3s;
+}
+
+
+@keyframes open {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.4);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
