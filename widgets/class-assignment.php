@@ -291,16 +291,17 @@ class Assignment extends Widget_Base {
 				<div class="accordian__title">
 				{{{settings.title}}}
 				</div>
-				<#  settings.list.map((item, index)=> {
+				<#  settings.list.map((item, index) => {
 					if( 0 === index ) {
 					#><div class="accordian__heading active"> 
 					{{{item.heading}}}
 					</div><#
-					}
+					} else {
 					#>
 					<div class="accordian__heading">
 					{{{item.heading}}}
 					</div><#
+				}
 				})#>
 
 				</div>
