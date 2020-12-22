@@ -136,7 +136,7 @@ class Assignment extends Widget_Base {
 			array(
 				'label'   => __( 'Title', 'elementor-assignment' ),
 				'type'    => Controls_Manager::TEXT,
-				'default' => __( 'Title', 'elementor-assignment' ),
+				'default' => __( 'Title of this accordian', 'elementor-assignment' ),
 			)
 		);
 
@@ -268,7 +268,7 @@ class Assignment extends Widget_Base {
 				</div>
 			</div>
 		</div>
-					<?php
+		<?php
 	}
 
 				/**
@@ -283,7 +283,6 @@ class Assignment extends Widget_Base {
 	protected function _content_template() {  // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 		?>
 		<#
-		//console.log(settings.list);
 		if ( settings.list ){
 		#>
 		<div class="accordian">
@@ -292,19 +291,25 @@ class Assignment extends Widget_Base {
 				<div class="accordian__title">
 				{{{settings.title}}}
 				</div>
+				<#  settings.list.map((item, index)=> {
+					if( 0 === index ) {
+					#><div class="accordian__heading active"> 
+					{{{item.heading}}}
+					</div><#
+					}
+					#>
 					<div class="accordian__heading">
-					{{{settings.list[0].heading}}}
-						<#
-						console.log(settings.list);
-						#>
-					</div>
+					{{{item.heading}}}
+					</div><#
+				})#>
+
 				</div>
 				<div class="accordian__section">
 					<div class="accordian__section-b">
 
-						<div class="accordian__content">
+						<div class="accordian__content active">
 							<div class="accordian__description">
-
+							{{{settings.list[0].description}}}
 							</div>
 							<a class="accordian__button" href="{{{settings.list[0].button_url.url}}}" > 
 							{{{settings.list[0].button_name}}}
@@ -316,20 +321,13 @@ class Assignment extends Widget_Base {
 				<div class="accordian__section">
 					<div class="accordian__section-c">
 
-							<img class="accordian__image" src="{{{settings.list[0].image.url}}}" />
+							<img class="accordian__image active" src="{{{settings.list[0].image.url}}}" />
 
 					</div>
 				</div>
 			</div>
 		</div>
-		<# } else{
-			#>
-			<h1> 
-				Loading...
-			</h1>
-			<#
-		}
-		#>
+		<# } #>
 		<?php
 	}
 }
