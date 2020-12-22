@@ -327,7 +327,9 @@ class Assignment extends Widget_Base {
 				</div>
 			</div>
 		</div>
-		<# } #>
+		<# } else {
+			<h1> Loading ... </h1>
+		} #>
 		<?php
 	}
 }
