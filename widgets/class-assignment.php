@@ -201,8 +201,8 @@ class Assignment extends Widget_Base {
 						),
 					),
 				),
-				'title_field' => '{{{ heading }}}',
-			),
+				'title_field' => '{{{ heading }}}', // phpcs:ignore WordPressVIPMinimum.Security.Mustache.OutputNotation
+			)
 		);
 
 		$this->end_controls_section();
@@ -219,19 +219,19 @@ class Assignment extends Widget_Base {
 	 */
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
+		
 		?>
 		<div class="accordian">
 			<div class="accordian__item">
 				<div class="accordian__section">
 				<div class="accordian__title">
-		<?php echo $settings['title']; ?>
+		<?php echo esc_html( $settings['title'] ); ?>
 		</div>
 				<?php
 				foreach ( $settings['list'] as $key => $item ) {
 					?>
 					<div class="accordian__heading <?php echo ( 0 === $key ) ? 'active' : ''; ?>"">
-					<?php echo $item['heading']; ?>
+					<?php echo esc_html( $item['heading'] ); ?>
 					</div>
 					<?php
 				}
@@ -244,10 +244,10 @@ class Assignment extends Widget_Base {
 							?>
 						<div class="accordian__content  <?php echo ( 0 === $key ) ? 'active' : ''; ?>">
 							<div class="accordian__description">
-							<?php echo $item['description']; ?>
+							<?php echo esc_html( $item['description'] ); ?>
 							</div>
-							<a class="accordian__button" href="<?php echo $settings['list'][ $key ]['button_url']['url']; ?>" > 
-							<?php echo $item['button_name']; ?>
+							<a class="accordian__button" href="<?php echo esc_url( $settings['list'][ $key ]['button_url']['url'] ); ?>" > 
+							<?php echo esc_html( $item['button_name'] ); ?>
 							</a>
 						</div>
 							<?php
@@ -260,7 +260,7 @@ class Assignment extends Widget_Base {
 						<?php
 						foreach ( $settings['list'] as $key => $item ) {
 							?>
-							<img class="accordian__image <?php echo ( 0 === $key ) ? 'active' : ''; ?>" src="<?php echo $item['image']['url']; ?>" />
+							<img class="accordian__image <?php echo ( 0 === $key ) ? 'active' : ''; ?>" src="<?php echo esc_url( $item['image']['url'] ); ?>" />
 							<?php
 						}
 						?>
@@ -280,7 +280,7 @@ class Assignment extends Widget_Base {
 				 *
 				 * @access protected
 				 */
-	protected function _content_template() {  // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+	protected function _content_template() {  // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore 
 		?>
 		<#
 		if ( settings.list ){
@@ -289,17 +289,17 @@ class Assignment extends Widget_Base {
 			<div class="accordian__item">
 				<div class="accordian__section">
 				<div class="accordian__title">
-				{{{settings.title}}}
+				{{settings.title}} 
 				</div>
 				<#  settings.list.map((item, index) => {
 					if( 0 === index ) {
 					#><div class="accordian__heading active"> 
-					{{{item.heading}}}
+					{{item.heading}}
 					</div><#
 					} else {
 					#>
 					<div class="accordian__heading">
-					{{{item.heading}}}
+					{{item.heading}} 
 					</div><#
 				}
 				})#>
@@ -310,10 +310,10 @@ class Assignment extends Widget_Base {
 
 						<div class="accordian__content active">
 							<div class="accordian__description">
-							{{{settings.list[0].description}}}
+							{{settings.list[0].description}}
 							</div>
-							<a class="accordian__button" href="{{{settings.list[0].button_url.url}}}" > 
-							{{{settings.list[0].button_name}}}
+							<a class="accordian__button" href="{{settings.list[0].button_url.url}}" > 
+							{{settings.list[0].button_name}} 
 							</a>
 						</div>
 
@@ -322,8 +322,7 @@ class Assignment extends Widget_Base {
 				<div class="accordian__section">
 					<div class="accordian__section-c">
 
-							<img class="accordian__image active" src="{{{settings.list[0].image.url}}}" />
-
+							<img class="accordian__image active" src="{{settings.list[0].image.url}}" /> 
 					</div>
 				</div>
 			</div>
