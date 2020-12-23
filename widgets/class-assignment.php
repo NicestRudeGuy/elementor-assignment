@@ -219,7 +219,6 @@ class Assignment extends Widget_Base {
 	 */
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-		
 		?>
 		<div class="accordian">
 			<div class="accordian__item">
@@ -230,7 +229,7 @@ class Assignment extends Widget_Base {
 				<?php
 				foreach ( $settings['list'] as $key => $item ) {
 					?>
-					<div class="accordian__heading <?php echo ( 0 === $key ) ? 'active' : ''; ?>"">
+					<div class="accordian__heading <?php echo ( 0 === $key ) ? 'active' : ''; ?>" >
 					<?php echo esc_html( $item['heading'] ); ?>
 					</div>
 					<?php

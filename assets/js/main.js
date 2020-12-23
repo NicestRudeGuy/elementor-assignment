@@ -1,19 +1,25 @@
 console.log('hello from assignment js script');
 
-const items = document.querySelectorAll('.accordian__heading');
-const contents = document.querySelectorAll('.accordian__content');
-const images = document.querySelectorAll('.accordian__image');
+(function ($) {
+    const items = $('.accordian__heading');
 
-items.forEach((item, index) => {
-    item.addEventListener('click', () => {
+    $(items).on('click', function () {
+        const index = $(this).index() - 1;
+        const parent = $(this).parents('.elementor-element').data('id');
+        const parentClass = '.elementor-element-' + parent;
+        const contents = $(parentClass).find('.accordian__content');
+        const images = $(parentClass).find('.accordian__image');
 
-        items.forEach(sib => sib.classList.remove('active'));
-        item.classList.add('active');
+        $(this).siblings().removeClass('active');
+        $(this).addClass('active');
 
-        contents.forEach(sib => sib.classList.remove('active'));
-        contents[index].classList.add('active');
+        const content = $($(contents)[index]);
+        content.siblings().removeClass('active');
+        content.addClass('active');
 
-        images.forEach(sib => sib.classList.remove('active'));
-        images[index].classList.add('active');
-    })
-});
+        const image = $($(images)[index]);
+        image.siblings().removeClass('active');
+        image.addClass('active');
+    });
+
+})(jQuery);
