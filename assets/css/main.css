@@ -1,5 +1,12 @@
+:root {
+  --blue-light:  rgb(173, 216, 230);
+  --blue--dark: rgb(11, 97, 158);
+  --white: rgb(255, 255, 255);
+  --grey: rgba(221, 221, 221, 0.746);
+}
+
 .accordian {
-  background-color: rgb(255, 255, 255);
+  background-color: var(--white);
   padding: 40px 10px;
 }
 
@@ -17,7 +24,7 @@
 }
 
 .accordian__section {
-  flex:1;
+  flex: 1;
   align-items: center;
 }
 
@@ -29,10 +36,10 @@
 }
 
 .accordian__heading.active {
-  border-left: 3px solid rgb(11, 97, 158);
-  background: rgba(221, 221, 221, 0.746);
-  color:  rgb(11, 97, 158);
-  transition: 0.5s;
+  border-left: 3px solid var(--blue--dark);
+  background: var(--grey);
+  color: var(--blue--dark);
+  transition: background 0.5s;
 }
 
 .accordian__heading.active:after {
@@ -58,9 +65,9 @@
 .accordian__button {
   display: inline-block;
   margin-top: 20px;
-  background-color: rgb(11, 97, 158);
-  color: rgb(255, 255, 255); 
-  cursor: pointer; 
+  background-color: var(--blue--dark);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   font-weight: 500;
@@ -69,16 +76,15 @@
 
 .accordian__button:hover {
   position: relative;
-  transform: translate(-5px,-5px);
-  box-shadow: 5px 5px rgb(173, 216, 230);
+  transform: translate(-5px, -5px);
+  box-shadow: 5px 5px var(--blue-light);
 }
 
-.accordian__section-b{
+.accordian__section-b {
   display: flex;
   height: 100%;
   align-items: center;
   justify-content: center;
-
 }
 
 .accordian__section-c {
@@ -92,19 +98,20 @@
   transition: all 1s;
 }
 
-.accordian__image , .accordian__content {
+.accordian__image,
+.accordian__content {
   display: none;
 }
 
-.accordian__image.active , .accordian__content.active {
+.accordian__image.active,
+.accordian__content.active {
   display: block;
   animation: pop 0.3s;
 }
 
-.site a:focus:not(.wp-block-button__link):not(.wp-block-file__button)  {
-  background-color: rgb(11, 97, 158);
+.site a:focus:not(.wp-block-button__link):not(.wp-block-file__button) {
+  background-color: var(--blue--dark);
 }
-
 
 @keyframes open {
   0% {
