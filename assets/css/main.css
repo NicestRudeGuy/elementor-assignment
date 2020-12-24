@@ -6,7 +6,7 @@
 }
 
 .accordian {
-  background-color: var(--white);
+  background: var(--white);
   padding: 40px 10px;
 }
 
@@ -65,7 +65,7 @@
 .accordian__button {
   display: inline-block;
   margin-top: 20px;
-  background-color: var(--blue--dark);
+  background: var(--blue--dark);
   color: rgb(255, 255, 255);
   cursor: pointer;
   padding: 0.5rem 1rem;
@@ -109,8 +109,9 @@
   animation: pop 0.3s;
 }
 
+/* overwritting elementor class which hides button after clicking */
 .site a:focus:not(.wp-block-button__link):not(.wp-block-file__button) {
-  background-color: var(--blue--dark);
+  background: var(--blue--dark);
 }
 
 @keyframes open {
