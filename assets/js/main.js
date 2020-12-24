@@ -1,4 +1,3 @@
-console.log('hello from assignment js script');
 
 (function ($) {
     const items = $('.accordian__heading');
