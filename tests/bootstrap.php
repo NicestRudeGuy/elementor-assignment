@@ -29,3 +29,6 @@ tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 
 // Start up the WP testing environment.
 require $_tests_dir . '/includes/bootstrap.php';
+
+// include the widget file.
+//require_once dirname( dirname( __FILE__ ) ) . '/widgets/class-assignment.php';

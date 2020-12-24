@@ -245,7 +245,7 @@ class Assignment extends Widget_Base {
 							<div class="accordian__description">
 							<?php echo esc_html( $item['description'] ); ?>
 							</div>
-							<a class="accordian__button" href="<?php echo esc_url( $settings['list'][ $key ]['button_url']['url'] ); ?>" > 
+							<a class="accordian__button" href="<?php echo esc_url( $item['button_url']['url'] ); ?>" > 
 							<?php echo esc_html( $item['button_name'] ); ?>
 							</a>
 						</div>

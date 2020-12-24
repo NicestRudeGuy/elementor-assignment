@@ -11,13 +11,18 @@
 class Test_Assignment extends WP_UnitTestCase {
 
 	/**
-	 * A single example test.
+	 * Test to check if the plugin is loaded with elementor.
 	 */
 	public function test_construct() {
-		// Replace this with some actual testing code.
-		require_once 'widgets/class-assignment.php';
-		$widget_assignment = Assignment;
-		$name              = $widget_assignment->get_name();
-		$this->assertTrue( 'assignment' === $name );
+		$plugin_loaded = new Elementor_Assignment();
+		$is_loaded     = has_action( 'plugins_loaded', array( $plugin_loaded, 'init' ) );
+		$this->assertTrue( 10 === $is_loaded );
+	}
+
+	/**
+	 * Test to check the name of widget.
+	 */
+	public function test_get_name() {
+
 	}
 }
