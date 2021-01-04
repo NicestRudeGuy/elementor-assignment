@@ -279,7 +279,7 @@ class Assignment extends Widget_Base {
 				 *
 				 * @access protected
 				 */
-	protected function _content_template() {  // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore 
+	/* protected function _content_template() {  // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore 
 		?>
 		<#
 		if ( settings.list ){
@@ -328,5 +328,5 @@ class Assignment extends Widget_Base {
 		</div>
 		<# } #>
 		<?php
-	}
+	} */
 }
